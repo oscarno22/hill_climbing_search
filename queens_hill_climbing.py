@@ -177,7 +177,6 @@ def main():
     n = input("Enter integer > 0: ")
     print("\n")
 
-    """
     for i in range(4):
         print("HILL CLIMBING SEARCH " + str(i))
         grid = generate_start_state(int(n))
@@ -186,7 +185,6 @@ def main():
             for row in to_array(state):
                 print(row)
             print("\n")
-    """
 
     """
     for i in range(4):
@@ -199,6 +197,7 @@ def main():
             print("\n")
     """
 
+    """
     successes = 0
     success_steps = []
     failures = 0
@@ -284,6 +283,7 @@ def main():
 
     print("AVG STEPS: " + str(avg_side_steps))
     print("AVG RESTARTS: " + str(avg_side_restarts))
+    """
 
 
 if __name__ == '__main__':
