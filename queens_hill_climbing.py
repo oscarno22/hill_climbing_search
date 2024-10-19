@@ -177,27 +177,6 @@ def main():
     n = input("Enter integer > 0: ")
     print("\n")
 
-    for i in range(4):
-        print("HILL CLIMBING SEARCH " + str(i))
-        grid = generate_start_state(int(n))
-        final, steps, path = hill_climbing(grid)
-        for state in path:
-            for row in to_array(state):
-                print(row)
-            print("\n")
-
-    """
-    for i in range(4):
-        print("HILL CLIMBING WITH  SIDEWAYS MOVE SEARCH " + str(i))
-        grid = generate_start_state(int(n))
-        final, steps, path = hill_climbing_with_sideways(grid)
-        for state in path:
-            for row in to_array(state):
-                print(row)
-            print("\n")
-    """
-
-    """
     successes = 0
     success_steps = []
     failures = 0
@@ -283,6 +262,26 @@ def main():
 
     print("AVG STEPS: " + str(avg_side_steps))
     print("AVG RESTARTS: " + str(avg_side_restarts))
+
+    # Uncomment to see search sequences for 4 random initial configurations (w/ & w/o sideways move)
+    """
+    for i in range(4):
+        print("HILL CLIMBING SEARCH " + str(i))
+        grid = generate_start_state(int(n))
+        final, steps, path = hill_climbing(grid)
+        for state in path:
+            for row in to_array(state):
+                print(row)
+            print("\n")
+
+    for i in range(4):
+        print("HILL CLIMBING WITH  SIDEWAYS MOVE SEARCH " + str(i))
+        grid = generate_start_state(int(n))
+        final, steps, path = hill_climbing_with_sideways(grid)
+        for state in path:
+            for row in to_array(state):
+                print(row)
+            print("\n")
     """
 
 
