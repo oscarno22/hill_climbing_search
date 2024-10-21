@@ -15,15 +15,15 @@ def objective(grid):
 
     for row in grid:
         if len(row) > 1:
-            heuristic += len(row) * (len(row) - 1) // 2  # check pairwise row conflicts
+            heuristic += len(row)*(len(row)-1) // 2  # check pairwise row conflicts
 
     for i in range(n):
-        for j in range(i + 1, n):
+        for j in range(i+1, n):
             for col_i in grid[i]:
                 for col_j in grid[j]:
                     if col_i == col_j:  # check row conflicts
                         heuristic += 1
-                    if abs(col_i - col_j) == abs(i - j):  # check diagonal conflicts
+                    if abs(col_i-col_j) == abs(i-j):  # check diagonal conflicts
                         heuristic += 1
 
     return heuristic
@@ -41,8 +41,8 @@ def get_moves(grid):
             for dr, dc in directions:  # for each queen, check each move direction
                 steps = 1  # allows multiple moves in a single direction
                 while True:
-                    to_row = from_row + dr * steps
-                    to_col = from_col + dc * steps
+                    to_row = from_row + dr*steps
+                    to_col = from_col + dc*steps
 
                     if 0 <= to_row < n and 0 <= to_col < n:  # respect bounds of board
                         if to_col not in grid[to_row]:  # respect other queens
@@ -51,7 +51,6 @@ def get_moves(grid):
                             break  # ran into a queen, so stop checking moves in given direction
                     else:
                         break  # ran out of bounds, so stop checking moves in given direction
-
                     steps += 1  # continue moving in given direction
 
     return possible_moves
@@ -102,7 +101,7 @@ def to_array(grid):
 
 
 def generate_start_state(n):
-    grid = [[] for _ in range(n)]
+    grid = [[] for _ in range(n)]  # initialize empty state
     all_positions = [(row, col) for row in range(n) for col in range(n)]
     chosen_positions = random.sample(all_positions, n)  # randomly choose i, j indices without replacement
 
@@ -132,7 +131,7 @@ def hill_climbing_with_sideways(grid):
     current = grid
     step_count = 0
     max_sideways_moves = 50  # limit number of consecutive sideways moves
-    sideways_moves = 0
+    sideways_moves = 0  # counter for consecutive sideways moves
     path = []  # track search path
 
     while True:
@@ -154,7 +153,6 @@ def hill_climbing_with_sideways(grid):
         else:  # if updating improves heuristic
             current = min_neighbor
             sideways_moves = 0
-
         step_count += 1
 
 
@@ -266,7 +264,7 @@ def main():
     # Uncomment to see search sequences for 4 random initial configurations (w/ & w/o sideways move)
     """
     for i in range(4):
-        print("HILL CLIMBING SEARCH " + str(i))
+        print("HILL CLIMBING SEARCH " + str(i+1))
         grid = generate_start_state(int(n))
         final, steps, path = hill_climbing(grid)
         for state in path:
@@ -275,7 +273,7 @@ def main():
             print("\n")
 
     for i in range(4):
-        print("HILL CLIMBING WITH  SIDEWAYS MOVE SEARCH " + str(i))
+        print("HILL CLIMBING WITH  SIDEWAYS MOVE SEARCH " + str(i+1))
         grid = generate_start_state(int(n))
         final, steps, path = hill_climbing_with_sideways(grid)
         for state in path:
